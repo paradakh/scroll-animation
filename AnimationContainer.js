@@ -1,13 +1,9 @@
-import AnimationsRenderer from './AnimationRenderer';
-
 export class AnimationContainer {
   constructor(PositionCalculator, parts = []) {
     this.parts = parts;
     this.lastPosition = 0;
     this.position = PositionCalculator;
     this.progress = ::this.position.getPosition;
-
-    AnimationsRenderer.add(::this.animate);
   }
 
   animate(scroll = window.pageYOffset) {

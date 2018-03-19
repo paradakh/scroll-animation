@@ -1,24 +1,18 @@
-class AnimationRenderer {
-  constructor() {
-    this.animations = [];
-    this.animate();
+export class AnimationRenderer {
+  constructor(...containers) {
+    this.containers = containers;
   }
 
   animate() {
-    requestAnimationFrame(() => {
-      this.animations.forEach((animation) => {
-        animation(window.pageYOffset);
-      });
-
-      this.animate();
-    });
+    const scroll = window.pageYOffset;
+    this.containers.forEach(container => container.animate(scroll));
   }
 
-  add(...animations) {
-    this.animations.push(...animations);
+  loop() {
+    window.requestAnimationFrame(() => {
+      this.animate();
+      this.loop();
+    })
   }
 }
 
-const animationRenderer = new AnimationRenderer();
-
-export default animationRenderer;
