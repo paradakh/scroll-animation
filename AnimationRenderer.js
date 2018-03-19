@@ -1,5 +1,3 @@
-const animationRenderer = new AnimationRenderer();
-
 class AnimationRenderer {
   constructor() {
     this.animations = [];
@@ -20,5 +18,7 @@ class AnimationRenderer {
     this.animations.push(...animations);
   }
 }
+
+const animationRenderer = new AnimationRenderer();
 
 export default animationRenderer;
