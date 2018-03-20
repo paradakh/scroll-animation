@@ -11,7 +11,7 @@ export class Container {
 
     if (position !== this.lastPosition) {
       this.lastPosition = position;
-      this.parts.forEach(part => part.render(position));
+      this.parts.forEach(part => part.animate(position));
     }
   }
 
