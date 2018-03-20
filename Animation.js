@@ -1,4 +1,4 @@
-export class AnimationPart {
+export class Animation {
   constructor(element, from, to, options = {}) {
     this.from = from;
     this.to = to;

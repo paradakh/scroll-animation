@@ -1,4 +1,4 @@
-export class PositionCalculator {
+export class Position {
   constructor(element, from, to) {
     this.element = element;
     this.fromFn = from;

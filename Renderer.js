@@ -1,16 +1,16 @@
-export class AnimationRenderer {
+export class Renderer {
   constructor(...containers) {
     this.containers = containers;
   }
 
-  animate() {
+  render() {
     const scroll = window.pageYOffset;
     this.containers.forEach(container => container.animate(scroll));
   }
 
   loop() {
     window.requestAnimationFrame(() => {
-      this.animate();
+      this.render();
       this.loop();
     })
   }
