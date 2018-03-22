@@ -1,5 +1,9 @@
-export class Animation {
-    constructor(element, from, to, options = {}) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Animation = /** @class */ (function () {
+    function Animation(element, from, to, options) {
+        if (options === void 0) { options = {}; }
+        var _this = this;
         this.element = element;
         this.from = from;
         this.to = to;
@@ -7,36 +11,38 @@ export class Animation {
         this.progress = 0;
         this.debounceId = -1;
         this.style = element.style;
-        this.easing = this.validateOption('easing', (n) => n);
-        setTimeout(() => {
-            this.update();
-            window.addEventListener('resize', () => {
-                clearTimeout(this.debounceId);
-                this.debounceId = setTimeout(this.update.bind(this), 400);
+        this.easing = this.validateOption('easing', function (n) { return n; });
+        setTimeout(function () {
+            _this.update();
+            window.addEventListener('resize', function () {
+                clearTimeout(_this.debounceId);
+                _this.debounceId = setTimeout(_this.update.bind(_this), 400);
             });
         }, 20);
     }
-    validateOption(option, placeholder) {
-        const field = this.options[option];
+    Animation.prototype.validateOption = function (option, placeholder) {
+        var field = this.options[option];
         return ((field !== undefined) ? field : placeholder);
-    }
-    update() {
+    };
+    Animation.prototype.update = function () {
         window.requestAnimationFrame(this.render.bind(this));
-    }
-    render() { }
-    calcProgress(position) {
-        const { from, to } = this;
-        let progress = 0;
+    };
+    Animation.prototype.render = function () { };
+    Animation.prototype.calcProgress = function (position) {
+        var _a = this, from = _a.from, to = _a.to;
+        var progress = 0;
         if (position > from)
             progress = (position < to) ? (position - from) / (to - from) : 1;
         return this.easing(progress);
-    }
-    animate(position) {
-        const newProgress = this.calcProgress(position);
+    };
+    Animation.prototype.animate = function (position) {
+        var newProgress = this.calcProgress(position);
         if (newProgress !== this.progress) {
             this.progress = newProgress;
             this.render();
         }
-    }
-}
+    };
+    return Animation;
+}());
+exports.Animation = Animation;
 //# sourceMappingURL=Animation.js.map

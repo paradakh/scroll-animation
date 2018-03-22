@@ -1,11 +1,11 @@
 {
   "name": "scroll-animation",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "rimraf ./dist && tsc"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/vladnagih/scroll-animation#readme",
   "devDependencies": {
+    "rimraf": "^2.6.2",
     "typescript": "^2.7.2"
   }
 }

@@ -4,8 +4,8 @@
     "sourceMap": true,
     "declaration": true,
     "outDir": "dist",
-    "module": "es6",
-    "target": "es2015",
+    "module": "commonjs",
+    "target": "es5",
     "strict": true
   },
   "exclude": [
