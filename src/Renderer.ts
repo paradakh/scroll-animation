@@ -1,18 +1,17 @@
-export class Renderer {
-  constructor(...containers) {
-    this.containers = containers;
-  }
+import { AnimatableOnScroll } from './interfaces';
 
-  render() {
+export class Renderer {
+  constructor(public containers: AnimatableOnScroll[]) { }
+
+  public render() {
     const scroll = window.pageYOffset;
     this.containers.forEach(container => container.animate(scroll));
   }
 
-  loop() {
+  public loop() {
     window.requestAnimationFrame(() => {
       this.render();
       this.loop();
     })
   }
 }
-

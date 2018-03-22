@@ -1,10 +1,11 @@
 {
   "name": "scroll-animation",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/vladnagih/scroll-animation/issues"
   },
-  "homepage": "https://github.com/vladnagih/scroll-animation#readme"
+  "homepage": "https://github.com/vladnagih/scroll-animation#readme",
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
 }

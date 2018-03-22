@@ -1,4 +1,4 @@
 export { Animation } from './Animation';
-export { Renderer } from './Renderer';
 export { Container } from './Container';
+export { Renderer } from './Renderer';
 export { Position } from './Position';

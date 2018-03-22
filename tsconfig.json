@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "sourceRoot": "src",
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "dist",
+    "module": "es6",
+    "target": "es2015",
+    "strict": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
