@@ -1,11 +1,16 @@
-import { Animatable, AnimatableOnScroll, Updatable, WithPositionGetter } from './interfaces';
+import {
+  Animatable,
+  AnimatableOnScroll,
+  Updatable,
+  WithPositionGetter
+} from './interfaces';
 
 export class Container implements Updatable, AnimatableOnScroll {
   public progress: (scroll: number) => number;
   private lastPosition = 0;
 
   constructor(
-    public position: (WithPositionGetter & Updatable),
+    public position: WithPositionGetter & Updatable,
     public parts: (Animatable & Updatable)[] = []
   ) {
     this.progress = position.getPosition.bind(position);

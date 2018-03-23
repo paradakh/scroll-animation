@@ -1,14 +1,20 @@
-import {Env, Offset, PositionFn, Updatable, WithPositionGetter} from './interfaces';
+import {
+  Env,
+  Offset,
+  PositionFn,
+  Updatable,
+  WithPositionGetter
+} from './interfaces';
 
 export class Position implements WithPositionGetter, Updatable {
-
   public from = 0;
   public to = 0;
   private debounceId = -1;
 
-  constructor(public element: HTMLElement,
-              public fromFn: PositionFn,
-              public toFn: PositionFn,
+  constructor(
+    public element: HTMLElement,
+    public fromFn: PositionFn,
+    public toFn: PositionFn
   ) {
     this.update();
     window.addEventListener('resize', this.update.bind(this));
@@ -20,7 +26,7 @@ export class Position implements WithPositionGetter, Updatable {
     this.debounceId = setTimeout(() => {
       const env: Env = {
         width: window.innerWidth,
-        height: window.innerHeight,
+        height: window.innerHeight
       };
 
       const boundingClientRect = this.element.getBoundingClientRect();
@@ -29,9 +35,8 @@ export class Position implements WithPositionGetter, Updatable {
       const offset: Offset = {
         height: boundingClientRect.height,
         bottom: boundingClientRect.bottom + pageYOffset,
-        top: boundingClientRect.top + pageYOffset,
+        top: boundingClientRect.top + pageYOffset
       };
-
 
       this.from = this.fromFn(offset, env);
       this.to = this.toFn(offset, env);
@@ -39,8 +44,14 @@ export class Position implements WithPositionGetter, Updatable {
   }
 
   getPosition(scroll: number) {
-    if (scroll <= this.from) return 0;
-    else if (scroll >= this.to) return 1;
+    if (scroll <= this.from) {
+      return 0;
+    }
+
+    if (scroll >= this.to) {
+      return 1;
+    }
+
     return (scroll - this.from) / (this.to - this.from);
   }
 }

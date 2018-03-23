@@ -18,24 +18,26 @@ var Position = /** @class */ (function () {
         this.debounceId = setTimeout(function () {
             var env = {
                 width: window.innerWidth,
-                height: window.innerHeight,
+                height: window.innerHeight
             };
             var boundingClientRect = _this.element.getBoundingClientRect();
             var pageYOffset = window.pageYOffset;
             var offset = {
                 height: boundingClientRect.height,
                 bottom: boundingClientRect.bottom + pageYOffset,
-                top: boundingClientRect.top + pageYOffset,
+                top: boundingClientRect.top + pageYOffset
             };
             _this.from = _this.fromFn(offset, env);
             _this.to = _this.toFn(offset, env);
         }, 300);
     };
     Position.prototype.getPosition = function (scroll) {
-        if (scroll <= this.from)
+        if (scroll <= this.from) {
             return 0;
-        else if (scroll >= this.to)
+        }
+        if (scroll >= this.to) {
             return 1;
+        }
         return (scroll - this.from) / (this.to - this.from);
     };
     return Position;

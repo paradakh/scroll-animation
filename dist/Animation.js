@@ -22,17 +22,18 @@ var Animation = /** @class */ (function () {
     }
     Animation.prototype.validateOption = function (option, placeholder) {
         var field = this.options[option];
-        return ((field !== undefined) ? field : placeholder);
+        return field !== undefined ? field : placeholder;
     };
     Animation.prototype.update = function () {
         window.requestAnimationFrame(this.render.bind(this));
     };
     Animation.prototype.render = function () { };
     Animation.prototype.calcProgress = function (position) {
-        var _a = this, from = _a.from, to = _a.to;
         var progress = 0;
-        if (position > from)
-            progress = (position < to) ? (position - from) / (to - from) : 1;
+        if (position > this.from) {
+            progress =
+                position < this.to ? (position - this.from) / (this.to - this.from) : 1;
+        }
         return this.easing(progress);
     };
     Animation.prototype.animate = function (position) {

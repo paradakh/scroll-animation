@@ -1,7 +1,7 @@
 import { AnimatableOnScroll } from './interfaces';
 
 export class Renderer {
-  constructor(public containers: AnimatableOnScroll[]) { }
+  constructor(public containers: AnimatableOnScroll[]) {}
 
   public render() {
     const scroll = window.pageYOffset;
@@ -12,6 +12,6 @@ export class Renderer {
     window.requestAnimationFrame(() => {
       this.render();
       this.loop();
-    })
+    });
   }
 }
