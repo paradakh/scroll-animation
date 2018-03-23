@@ -4,7 +4,7 @@ import {
   PositionFn,
   Updatable,
   WithPositionGetter
-} from './interfaces';
+} from '../typings';
 
 export class Position implements WithPositionGetter, Updatable {
   public from = 0;

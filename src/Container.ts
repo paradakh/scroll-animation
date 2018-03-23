@@ -3,7 +3,7 @@ import {
   AnimatableOnScroll,
   Updatable,
   WithPositionGetter
-} from './interfaces';
+} from '../typings';
 
 export class Container implements Updatable, AnimatableOnScroll {
   public progress: (scroll: number) => number;

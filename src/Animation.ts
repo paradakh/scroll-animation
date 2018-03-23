@@ -1,4 +1,4 @@
-import { Animatable, Updatable } from './interfaces';
+import { Animatable, Updatable } from '../typings';
 
 export class Animation implements Updatable, Animatable {
   private style: CSSStyleDeclaration;

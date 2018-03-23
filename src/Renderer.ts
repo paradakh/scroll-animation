@@ -1,4 +1,4 @@
-import { AnimatableOnScroll } from './interfaces';
+import { AnimatableOnScroll } from '../typings';
 
 export class Renderer {
   constructor(public containers: AnimatableOnScroll[]) {}

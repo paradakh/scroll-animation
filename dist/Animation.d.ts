@@ -1,4 +1,4 @@
-import { Animatable, Updatable } from './interfaces';
+import { Animatable, Updatable } from '../typings';
 export declare class Animation implements Updatable, Animatable {
     element: HTMLElement | SVGElement;
     from: number;

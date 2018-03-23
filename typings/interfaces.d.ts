@@ -24,5 +24,3 @@ export interface Env {
   height: number;
   width: number;
 }
-
-export type PositionFn = (offset: Offset, env: Env) => number;
