@@ -10,6 +10,10 @@ export interface Updatable {
   update: () => void;
 }
 
+export interface Renderable {
+  render: () => void;
+}
+
 export interface WithPositionGetter {
   getPosition: (scroll: number) => number;
 }

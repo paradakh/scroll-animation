@@ -1,6 +1,6 @@
-import { AnimatableOnScroll } from '../typings';
+import { AnimatableOnScroll, Renderable } from './typings';
 
-export class Renderer {
+export class Renderer implements Renderable {
   constructor(public containers: AnimatableOnScroll[]) {}
 
   public render() {

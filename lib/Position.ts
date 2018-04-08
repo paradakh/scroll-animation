@@ -4,12 +4,12 @@ import {
   PositionFn,
   Updatable,
   WithPositionGetter
-} from '../typings';
+} from './typings';
 
 export class Position implements WithPositionGetter, Updatable {
   public from = 0;
   public to = 0;
-  private debounceId = -1;
+  private debounceId: any = -1;
 
   constructor(
     public element: HTMLElement,
@@ -40,7 +40,7 @@ export class Position implements WithPositionGetter, Updatable {
 
       this.from = this.fromFn(offset, env);
       this.to = this.toFn(offset, env);
-    }, 300);
+    }, 50);
   }
 
   getPosition(scroll: number) {

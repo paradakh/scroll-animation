@@ -1,4 +1,4 @@
-import { Animatable, AnimatableOnScroll, Updatable, WithPositionGetter } from '../typings';
+import { Animatable, AnimatableOnScroll, Updatable, WithPositionGetter } from './typings';
 export declare class Container implements Updatable, AnimatableOnScroll {
     position: WithPositionGetter & Updatable;
     parts: (Animatable & Updatable)[];

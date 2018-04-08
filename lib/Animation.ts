@@ -1,9 +1,9 @@
-import { Animatable, Updatable } from '../typings';
+import { Animatable, Renderable, Updatable } from './typings';
 
-export class Animation implements Updatable, Animatable {
+export class Animation implements Updatable, Animatable, Renderable {
   private style: CSSStyleDeclaration;
-  private progress = 0;
   private debounceId = -1;
+  public progress = -1;
   public easing: (n: number) => number;
 
   constructor(
@@ -20,7 +20,7 @@ export class Animation implements Updatable, Animatable {
 
       window.addEventListener('resize', () => {
         clearTimeout(this.debounceId);
-        this.debounceId = setTimeout(this.update.bind(this), 400);
+        this.debounceId = setTimeout(this.update.bind(this), 50);
       });
     }, 20);
   }
