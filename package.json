@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "test": "tsc && tsc -p ./tsconfig-test.json  && ava",
+    "test": "tsc && tsc -p ./test  && ava",
     "build": "tsc && npm run prettify",
     "prettify": "prettier --write ./lib/**/*.ts ./test/**/*.ts"
   },

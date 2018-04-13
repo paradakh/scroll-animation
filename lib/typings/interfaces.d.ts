@@ -1,5 +1,5 @@
 export interface AnimatableOnScroll {
-  animate: (scroll?: number) => void;
+  animate: (scroll?: number, time?: any) => void;
 }
 
 export interface Animatable {
@@ -11,7 +11,7 @@ export interface Updatable {
 }
 
 export interface Renderable {
-  render: () => void;
+  render: (time: any) => void;
 }
 
 export interface WithPositionGetter {

@@ -99,7 +99,8 @@ test('should have progress same as position', async t => {
 
 test('should calc progress', async t => {
   const page = await newPage();
-  const cb = () => new Animation(document.body, 0.5, 1).calcProgress(0.75);
+  const cb = () =>
+    new Animation(document.body, 0.5, 1).calcProgress(0.75, 0.5, 1);
   t.is(await page.evaluate(cb), 0.5);
 });
 
@@ -122,6 +123,10 @@ test('should return default option value', async t => {
 test('should use easing', async t => {
   const page = await newPage();
   const cb = () =>
-    new Animation(document.body, 0, 1, { easing: () => 0 }).calcProgress(0.2);
+    new Animation(document.body, 0, 1, { easing: () => 0 }).calcProgress(
+      0.2,
+      0,
+      1
+    );
   t.is(await page.evaluate(cb), 0);
 });

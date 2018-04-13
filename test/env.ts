@@ -3,7 +3,6 @@ const packageConf = require('../package.json');
 const path = require('path');
 const webpack = require('webpack');
 const memFs = require('memory-fs');
-const fs = require('fs');
 
 // variables for tests
 export interface Globs {
@@ -42,6 +41,14 @@ export const newPage = async () => {
     height: 720
   });
 
+  await page.addStyleTag({
+    content: `
+      body {
+        height: 5000px;
+      }
+    `
+  });
+
   await page.addScriptTag({
     content: mFs.readFileSync(
       path.resolve(webpackConf.output.path, webpackConf.output.filename),
@@ -49,17 +56,10 @@ export const newPage = async () => {
     )
   });
 
-  await page.addScriptTag({
-    content: `
-      const lib = ${webpackConf.output.library};
-      
-      for (let mod in lib) {
-        window[mod] = lib[mod];
-      }
-      
-      document.body.style.height = '5000px';
-    `
-  });
+  await page.evaluate(
+    (libName: string) => Object.assign(window, (window as any)[libName]),
+    webpackConf.output.library
+  );
 
   return page;
 };

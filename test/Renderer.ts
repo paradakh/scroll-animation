@@ -16,7 +16,9 @@ test('should evaluate animate on containers', async t => {
       }
     };
 
-    new Renderer([Object.create(container), Object.create(container)]).render();
+    new Renderer([Object.create(container), Object.create(container)]).render(
+      Date.now()
+    );
 
     return result;
   };
@@ -42,4 +44,60 @@ test('should create animation loop', async t => {
   await page.waitFor(100);
 
   t.true(await page.evaluate(() => (window as any).result > 1));
+});
+
+test('should always provide time difference', async t => {
+  const page = await newPage();
+
+  await page.evaluate(() => {
+    (window as any).isTriggered = false;
+    (window as any).wasUndefined = false;
+
+    const container: AnimatableOnScroll = {
+      animate(scroll, timeDiff) {
+        if (timeDiff !== undefined) {
+          (window as any).isTriggered = true;
+        } else {
+          (window as any).wasUndefined = true;
+        }
+      }
+    };
+
+    new Renderer([container]).loop();
+  });
+
+  await page.waitFor(100);
+
+  t.true(
+    await page.evaluate(
+      () => (window as any).isTriggered && !(window as any).wasUndefined
+    )
+  );
+});
+
+test('time difference should be meaningful', async t => {
+  const page = await newPage();
+
+  await page.evaluate(() => {
+    (window as any).result = true;
+
+    const container: AnimatableOnScroll = {
+      animate(scroll, timeDiff) {
+        if (
+          typeof timeDiff !== 'number' ||
+          isNaN(timeDiff) ||
+          timeDiff < 0 ||
+          timeDiff > 10000
+        ) {
+          (window as any).result = `Difference was ${timeDiff}`;
+        }
+      }
+    };
+
+    new Renderer([container]).loop();
+  });
+
+  await page.waitFor(100);
+
+  t.true(await page.evaluate(() => (window as any).result));
 });

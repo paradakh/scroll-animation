@@ -5,7 +5,6 @@ export declare class Position implements WithPositionGetter, Updatable {
     toFn: PositionFn;
     from: number;
     to: number;
-    private debounceId;
     constructor(element: HTMLElement, fromFn: PositionFn, toFn: PositionFn);
     update(): void;
     getPosition(scroll: number): number;
