@@ -17,7 +17,7 @@ export class Animation implements Updatable, Animatable, Renderable {
 
     setTimeout(() => {
       this.update();
-      window.addEventListener('resize', debounce(this.update.bind(this), 50));
+      window.addEventListener('resize', debounce(this.update.bind(this), 100));
     }, 20);
   }
 

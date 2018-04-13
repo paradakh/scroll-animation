@@ -43,3 +43,45 @@ test('base use case', async t => {
 
   t.is(await page.evaluate(() => document.body.style.opacity), '0.5');
 });
+
+test('Position should be updated before then Animation', async t => {
+  const page = await newPage();
+
+  await page.evaluate(() => {
+    class UpdatableAnimation extends Animation {
+      update() {
+        super.update();
+        (window as any).animationUpdateTime = Date.now();
+      }
+    }
+
+    class UpdatablePosition extends Position {
+      update() {
+        super.update();
+        (window as any).positionUpdateTime = Date.now();
+      }
+    }
+
+    new Renderer([
+      new Container(new UpdatablePosition(document.body, () => 0, () => 0), [
+        new UpdatableAnimation(document.body, 0, 1)
+      ])
+    ]).loop();
+  });
+
+  await page.waitFor(200);
+
+  await page.setViewport({
+    width: 400,
+    height: 400
+  });
+
+  await page.waitFor(200);
+
+  t.true(
+    await page.evaluate(
+      () =>
+        (window as any).animationUpdateTime > (window as any).positionUpdateTime
+    )
+  );
+});
