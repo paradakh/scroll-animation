@@ -44,25 +44,6 @@ test('should trigger render method on update', async t => {
   t.true(await page.evaluate(() => (window as any).result));
 });
 
-test('should trigger update method on resize', async t => {
-  const page = await newPage();
-
-  await page.evaluate(() => {
-    (window as any).result = false;
-
-    const animation = new Animation(document.body, 0, 1);
-
-    animation.update = () => {
-      (window as any).result = true;
-    };
-  });
-
-  await page.setViewport({ width: 3000, height: 1000 });
-  await page.waitFor(100);
-
-  t.true(await page.evaluate(() => (window as any).result));
-});
-
 test('should not trigger render method, while progress same as last', async t => {
   const page = await newPage();
 

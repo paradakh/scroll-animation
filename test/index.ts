@@ -51,14 +51,14 @@ test('Position should be updated before then Animation', async t => {
     class UpdatableAnimation extends Animation {
       update() {
         super.update();
-        (window as any).animationUpdateTime = Date.now();
+        (window as any).animationUpdateTime = new Date();
       }
     }
 
     class UpdatablePosition extends Position {
       update() {
         super.update();
-        (window as any).positionUpdateTime = Date.now();
+        (window as any).positionUpdateTime = new Date();
       }
     }
 
@@ -81,7 +81,8 @@ test('Position should be updated before then Animation', async t => {
   t.true(
     await page.evaluate(
       () =>
-        (window as any).animationUpdateTime > (window as any).positionUpdateTime
+        (window as any).animationUpdateTime >=
+        (window as any).positionUpdateTime
     )
   );
 });

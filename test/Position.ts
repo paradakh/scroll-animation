@@ -18,12 +18,13 @@ test('should get position', async t => {
   await page.evaluate(
     (start: number, end: number) => {
       (window as any).pos = new Position(document.body, () => start, () => end);
+      (window as any).pos.update();
     },
     scrolls[1],
     scrolls[3]
   );
 
-  await page.waitFor(100);
+  await page.waitFor(200);
 
   const cb = (positions: number[]) =>
     JSON.stringify(

@@ -5,7 +5,6 @@ import {
   Updatable,
   WithPositionGetter
 } from './typings';
-import { debounce } from './utils';
 
 export class Position implements WithPositionGetter, Updatable {
   public from = 0;
@@ -15,11 +14,7 @@ export class Position implements WithPositionGetter, Updatable {
     public element: HTMLElement,
     public fromFn: PositionFn,
     public toFn: PositionFn
-  ) {
-    const debbouncedUpdate = debounce(this.update.bind(this), 50);
-    debbouncedUpdate();
-    window.addEventListener('resize', debbouncedUpdate);
-  }
+  ) {}
 
   update() {
     const env: Env = {

@@ -1,5 +1,4 @@
 import { Animatable, Renderable, Updatable } from './typings';
-import { debounce } from './utils';
 
 export class Animation implements Updatable, Animatable, Renderable {
   public style: CSSStyleDeclaration;
@@ -14,11 +13,6 @@ export class Animation implements Updatable, Animatable, Renderable {
   ) {
     this.style = element.style;
     this.easing = this.validateOption('easing', (n: number) => n);
-
-    setTimeout(() => {
-      this.update();
-      window.addEventListener('resize', debounce(this.update.bind(this), 100));
-    }, 20);
   }
 
   validateOption(option: string, placeholder: any) {

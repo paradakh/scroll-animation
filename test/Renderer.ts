@@ -1,5 +1,5 @@
 import { test } from 'ava';
-import { Renderer as IRenderer, AnimatableOnScroll } from '../lib';
+import { Renderer as IRenderer, AnimatableOnScroll, Updatable } from '../lib';
 import { newPage } from './env';
 
 declare const Renderer: typeof IRenderer;
@@ -32,10 +32,11 @@ test('should create animation loop', async t => {
   await page.evaluate(() => {
     (window as any).result = 0;
 
-    const container: AnimatableOnScroll = {
+    const container: AnimatableOnScroll & Updatable = {
       animate() {
         (window as any).result += 1;
-      }
+      },
+      update() {}
     };
 
     new Renderer([container]).loop();
@@ -53,14 +54,15 @@ test('should always provide time difference', async t => {
     (window as any).isTriggered = false;
     (window as any).wasUndefined = false;
 
-    const container: AnimatableOnScroll = {
+    const container: AnimatableOnScroll & Updatable = {
       animate(scroll, timeDiff) {
         if (timeDiff !== undefined) {
           (window as any).isTriggered = true;
         } else {
           (window as any).wasUndefined = true;
         }
-      }
+      },
+      update() {}
     };
 
     new Renderer([container]).loop();
@@ -81,7 +83,7 @@ test('time difference should be meaningful', async t => {
   await page.evaluate(() => {
     (window as any).result = true;
 
-    const container: AnimatableOnScroll = {
+    const container: AnimatableOnScroll & Updatable = {
       animate(scroll, timeDiff) {
         if (
           typeof timeDiff !== 'number' ||
@@ -91,7 +93,8 @@ test('time difference should be meaningful', async t => {
         ) {
           (window as any).result = `Difference was ${timeDiff}`;
         }
-      }
+      },
+      update() {}
     };
 
     new Renderer([container]).loop();
