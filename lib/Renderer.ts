@@ -22,11 +22,15 @@ export class Renderer implements Renderable {
 
   public loop() {
     this.update();
-    window.addEventListener('resiae', debounce(this.update, 100));
+    window.addEventListener('resize', debounce(this.update, 100));
 
-    window.requestAnimationFrame((time: any) => {
-      this.render(time);
-      this.loop();
-    });
+    const tick = () => {
+      window.requestAnimationFrame((time: any) => {
+        this.render(time);
+        tick();
+      });
+    };
+
+    tick();
   }
 }
