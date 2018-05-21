@@ -22,7 +22,7 @@ export class Renderer implements Renderable {
 
   public loop() {
     this.update();
-    window.addEventListener('resize', debounce(this.update, 100));
+    window.addEventListener('resize', debounce(this.update.bind(this), 100));
 
     const tick = () => {
       window.requestAnimationFrame((time: any) => {
