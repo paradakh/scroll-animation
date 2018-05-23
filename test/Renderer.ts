@@ -104,3 +104,28 @@ test('time difference should be meaningful', async t => {
 
   t.true(await page.evaluate(() => (window as any).result));
 });
+
+test('should call update on resize with self context', async t => {
+  const page = await newPage();
+
+  await page.evaluate(() => {
+    const renderer = new Renderer([]);
+
+    renderer.update = function() {
+      (window as any).result = this === renderer;
+    };
+
+    renderer.loop();
+  });
+
+  await page.waitFor(100);
+
+  await page.setViewport({
+    width: 400,
+    height: 400
+  });
+
+  await page.waitFor(100);
+
+  t.true(await page.evaluate(() => (window as any).result));
+});
